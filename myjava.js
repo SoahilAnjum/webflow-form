@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const nameError = document.getElementById("name-error");
     const submitButton = document.getElementById("submit");
 
+    // Initially, the submit button has no type, so it's treated like a div
+    submitButton.removeAttribute("type");
+
     // If the form was submitted in the last 24 hours, hide the form and show a message
     if (formSubmitted) {
         form.style.display = "none"; // Hide the form
@@ -38,21 +41,18 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Initially, the submit button type is set to "button" to prevent submission
-    submitButton.type = "button";
-
-    // Validate the name field and update button type
+    // Validate the name field and update button type based on input
     nameInput.addEventListener("input", function() {
         const name = nameInput.value.trim();
 
         // Hide error message initially
         nameError.style.display = "none";
 
-        // Validate the name field and enable the submit button if valid
+        // If the name is valid, set the button type to "submit"
         if (name && name !== "RobertReiff" && name !== "AnnaReiff") {
-            submitButton.type = "submit";  // Allow form submission
+            submitButton.setAttribute("type", "submit");  // Allow form submission
         } else {
-            submitButton.type = "button";  // Prevent form submission
+            submitButton.removeAttribute("type");  // Keep the button like a div (non-clickable)
         }
     });
 
