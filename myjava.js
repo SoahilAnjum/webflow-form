@@ -20,13 +20,11 @@ function getCookie(name) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector(".w-form");
+    const formSubmitted = getCookie("appointmentFormSubmitted");
+    const form = document.getElementById("wf-form-Appointment-form");
     const nameInput = document.getElementById("your-name");
     const nameError = document.getElementById("name-error");
     const submitButton = document.getElementById("submit");
-    const hiddenmail = document.querySelector("#work-email");
-    
-    const formSubmitted = getCookie("appointmentFormSubmitted");
 
     // If the form was submitted in the last 24 hours, hide the form and show a message
     if (formSubmitted) {
@@ -69,12 +67,5 @@ document.addEventListener("DOMContentLoaded", function() {
             nameError.style.display = "block";
         }
     });
-
-    // Prevent form submission if #work-email is hidden
-    if (hiddenmail && hiddenmail.offsetParent === null) { // Checks if the field is hidden
-        form.addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent submission if hidden field is hidden
-        });
-    }
 });
 </script>
